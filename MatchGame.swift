@@ -1,6 +1,10 @@
 // CSCE 420: Programming Assignment 2
 // Kyle Wilson
 
+
+
+
+
 class Node {
 
   // data members
@@ -82,6 +86,20 @@ class Tree {
   }
 }
 
-var head = Node(matches: 7, level: 0)
-var tree = Tree(head: head)
-tree.printTree()
+// takes in # of matches, unwrapping optional int returned by toInt()
+// catches input errors 
+if Process.arguments.count > 1 {
+  if var argument = Process.arguments[1].toInt() {
+    if argument <= 1 {
+      println("Error: game must start with at least 2 matches")
+    }
+    else {
+      var head = Node(matches: argument, level: 0)
+      var tree = Tree(head: head)
+      tree.printTree()
+    }
+  }
+}
+else {
+  println("Error: please provide the number of matches as an argument")
+}
