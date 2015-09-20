@@ -26,7 +26,7 @@ class Node {
       value = level % 2 == 1 ? 1 : -1
       return 0
     }
-    for i in [2, 3, 4] {
+    for i in 2...4 {
       if (matches >= i) {
         var node = Node(matches: matches-(i-1), level: level+1)
         node.expand()
@@ -36,14 +36,47 @@ class Node {
     return 0
   }
 
-  // TODO: Recursive print
-  func print() {
+}
+
+class Tree {
+  // head of the tree
+  var head : Node
+  var matrixRepresentation : [[Int]] = [[]]
+
+  // constructor
+  init(head: Node) {
+    self.head = head
+    self.head.expand()
+    for x in 0...(head.matches-2) {
+      matrixRepresentation.append([])
+    }
+    traverse(self.head)
+  }
+
+  // traverse tree to store data in a matrix
+  // so that it can be displayed in a top down approach
+  func traverse(node: Node) {
+    var level = node.level
+    var value = node.value
+    var children = node.children
+
+    if (level == 0) {
+      matrixRepresentation[level].append(value)
+    }
     for n in children {
-      println(n.value)
+      traverse(n)
+      matrixRepresentation[level+1].append(n.value)
+    }
+  }
+
+  // prints matrix representation of tree
+  func printTree() {
+    for x in matrixRepresentation {
+      println(x)
     }
   }
 }
 
-var head = Node(matches: 2, level: 0)
-head.expand()
-head.print()
+var head = Node(matches: 4, level: 0)
+var tree = Tree(head: head)
+tree.printTree()
