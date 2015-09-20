@@ -39,10 +39,11 @@ class Node {
 }
 
 class Tree {
-  
+
   // head of the tree
   var head : Node
   var matrixRepresentation : [[Int]] = [[]]
+  var nodeCount : Int = 0
 
   // constructor
   init(head: Node) {
@@ -63,10 +64,12 @@ class Tree {
 
     if (level == 0) {
       matrixRepresentation[level].append(value)
+      nodeCount++
     }
     for n in children {
       traverse(n)
       matrixRepresentation[level+1].append(n.value)
+      nodeCount++
     }
   }
 
@@ -75,9 +78,10 @@ class Tree {
     for x in matrixRepresentation {
       println(x)
     }
+    println("Number of nodes: \(nodeCount)")
   }
 }
 
-var head = Node(matches: 4, level: 0)
+var head = Node(matches: 7, level: 0)
 var tree = Tree(head: head)
 tree.printTree()
