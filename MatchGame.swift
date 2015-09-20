@@ -1,6 +1,22 @@
-// CSCE 420: Programming Assignment 2
-// Kyle Wilson
+/* CSCE 420: Programming Assignment 2
+/ Kyle Wilson
+/
+/ Consider the following simple game played between two players.
+/ A pile of n matches is placed between Alice and Bob.
+/ Each player takes turns removing some matches from the pile, in an
+/ alternating fashion.
+/ Players are permitted remove one, two, or three matches in each turn.
+/ The player who is forced to take the last match loses.
+/
+/ 1. Write a program that generates the game tree for this game for each of
+/ n ∈ {3, 7, 15, 19} via the minimax algorithm.
+/
+/ 2. Extend your code to use alpha-beta pruning.
+/
+/ 3. Using the results from above synthesize a Moore machine for each of the
+/ games (i.e., for the three values of n and whether you go first or second). */
 
+// node representing a particular state in the game
 class Node {
 
   // data members
@@ -16,6 +32,7 @@ class Node {
     setValue()
   }
 
+  // set value of node based on level (odd is min, even is max)
   func setValue() {
     value = level % 2 == 1 ? 1 : -1
   }
@@ -44,6 +61,7 @@ class Node {
 
 }
 
+// game tree 
 class Tree {
 
   // head of the tree
