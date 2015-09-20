@@ -39,6 +39,7 @@ class Node {
 }
 
 class Tree {
+  
   // head of the tree
   var head : Node
   var matrixRepresentation : [[Int]] = [[]]
