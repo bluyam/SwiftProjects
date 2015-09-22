@@ -53,6 +53,7 @@ class Node {
       if matches >= i {
         var node = Node(matches: matches-(i-1), level: level+1)
         node.expand()
+        // add conditionals to only add children which survive pruning
         addChild(node)
       }
     }
@@ -61,12 +62,12 @@ class Node {
 
 }
 
-// game tree 
+// game tree
 class Tree {
 
   // head of the tree
   var head : Node
-  var matrixRepresentation : [[Int]] = [[]]
+  var matrixRepresentation : [[[Int]]] = [[[]]]
   var nodeCount : Int = 0
 
   // constructor
@@ -84,15 +85,16 @@ class Tree {
   func traverse(node: Node) {
     var level = node.level
     var value = node.value
+    var matches = node.matches
     var children = node.children
 
     if level == 0 {
-      matrixRepresentation[level].append(value)
+      matrixRepresentation[level][0] = [matches, value]
       nodeCount++
     }
     for n in children {
       traverse(n)
-      matrixRepresentation[level+1].append(n.value)
+      matrixRepresentation[level+1].append([n.matches, n.value])
       nodeCount++
     }
   }
